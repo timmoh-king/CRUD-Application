@@ -14,7 +14,8 @@ module.exports = {
       todoblue: '#0D99FF',
       todoorange: '#FA4A2D',
       todogreen: '#9CC87F',
-      todobackground: '#FAFAFA'
+      todobackground: '#FAFAFA',
+      todowhite: '#FFFFFF'
     },
     extend: {},
   },
