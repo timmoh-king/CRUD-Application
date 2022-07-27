@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Input = ({ name, label, ...rest }) => {
+const Select = ({ name, label, options, ...rest }) => {
   const styles =
-    "w-[500px] h-[45px] rounded-[3px] px-1 my-1 text-tododarkfade shadow-sm outline outline-1 drop-shadow-md drop-shadow-todogreen";
+    "w-[500px] h-[45px] rounded-[3px] pl-1 pr-2 my-2 shadow-sm outline outline-1 drop-shadow-md";
 
   return (
     <div className="mb-4">
@@ -13,17 +13,21 @@ const Input = ({ name, label, ...rest }) => {
         </label>
       </div>
       <div>
-        <input className={styles} name={name} {...rest} />
+        <select name={""} {...rest} className={styles}>
+          <option key={"/"} className="text-tododarkfade">
+            Important
+          </option>
+        </select>
       </div>
     </div>
   );
 };
 
-Input.propTypes = {
+Select.propTypes = {
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
 
-export default Input;
+export default Select;
