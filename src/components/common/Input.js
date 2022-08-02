@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Input = ({ name, label, ...rest }) => {
+const Input = ({ name, label, value , ...rest }) => {
   const styles =
     "w-[500px] h-[45px] rounded-[3px] px-1 my-1 text-tododarkfade shadow-sm outline outline-1 drop-shadow-md drop-shadow-todogreen";
 
@@ -13,7 +13,15 @@ const Input = ({ name, label, ...rest }) => {
         </label>
       </div>
       <div>
-        <input className={styles} name={name} {...rest} />
+
+        <input
+         value={ value }
+          className={styles} 
+          name={name} 
+          id={name}
+         {...rest}
+          />
+
       </div>
     </div>
   );

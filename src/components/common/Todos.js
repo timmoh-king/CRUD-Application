@@ -1,78 +1,82 @@
-/**
- * @Author: Your name
- * @Date:   2022-07-27 15:58:13
- * @Last Modified by:   Your name
- * @Last Modified time: 2022-07-28 17:49:43
- */
-import React, { Component } from 'react';
-import { BsPencilSquare } from "react-icons/bs";
-import { BsFillCheckSquareFill } from "react-icons/bs";
-import { BsFillTrashFill } from "react-icons/bs";
+import React from "react";
+import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 
-class Todos extends Component {
-    state = {  } 
-    render() { 
-        const style = "text-sm text-tododarkfade font-regular px-6 py-3 whitespace-nowrap"
-        
-        return (
-            <table className="w-full mt-5">
-            <tbody>
-              <tr className="ring-1 ring-todoblue rounded-1 rounded-[5px]">
-                <td className= {style}>
-                  Attend DAM stand up
+import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
+import { FaEdit } from "react-icons/fa";
+import { AiFillDelete } from "react-icons/ai";
+
+const TodoList = ({ todos, onDelete, onEdit, onComplete }) => {
+  const icons =
+    "cursor-pointer mx-1 hover:ring-1 ring-todogreen overflow-hidden transition-all duration-700";
+  const navigate = useNavigate();
+  return (
+    <>
+      <div className="float-left mb-[20px] ">
+        <p className="text-xl font-bold text-tododark mb-3">
+          All Tasks
+          <span className=" bg-todoorange px-2 text-todowhite rounded-full">
+            {todos.length}
+          </span>
+        </p>
+        <Button
+          page={false}
+          onClick={() => navigate("/todoform")}
+          label="Add task"
+        />
+      </div>
+      <div>
+        <table className="w-[100%] h-[40%] mt-5 overflow-scroll">
+          <tbody className="">
+            {todos.map((t) => (
+              <tr key={t.id} className="ring-1 ring-todoblue rounded">
+                <td
+                  className={`text-sm text-tododarkfade px-6 py-2 whitespace-nowrap ${
+                    t.completed ? "line-through" : " no-underline"
+                  }`}
+                >
+                  {t.todo}
                 </td>
-                <td className={style}>
-                  Important
+                <td
+                  className={`text-sm text-tododarkfade px-6 py-2 whitespace-nowrap font-medium ${
+                    t.completed ? "line-through" : " no-underline"
+                  }`}
+                >
+                  {t.category.name}
                 </td>
-                <td className="flex py-3">
-                  <BsPencilSquare className='fill-todoblue m-1'/>  
-                  <BsFillCheckSquareFill className='fill-todogreen m-1'/>
-                  <BsFillTrashFill className='fill-todoorange m-1'/>
+                <td className="flex my-2 float-right pr-2">
+                  <FaEdit
+                    size={20}
+                    className={`fill-todoblue  ${icons}`}
+                    onClick={onEdit}
+                  />
+                  {t.completed ? (
+                    <ImCheckboxChecked
+                      size={20}
+                      className={`fill-todogreen ${icons}`}
+                      onClick={() => onComplete(t)}
+                    />
+                  ) : (
+                    <ImCheckboxUnchecked
+                      size={20}
+                      className={`fill-todogreen ${icons}`}
+                      onClick={() => onComplete(t)}
+                    />
+                  )}
+
+                  <AiFillDelete
+                    size={20}
+                    className={`fill-todoorange ${icons}`}
+                    onClick={() => onDelete(t)}
+                  />
                 </td>
               </tr>
-              <tr className="ring-1 ring-todoblue rounded-1 rounded-[5px]">
-                <td className={style}>
-                  Go hiking at Ngong hills
-                </td>
-                <td className={style}>
-                  Urgent
-                </td>
-                <td className="flex py-3">
-                  <BsPencilSquare className='fill-todoblue m-1'/>  
-                  <BsFillCheckSquareFill className='fill-todogreen m-1'/>
-                  <BsFillTrashFill className='fill-todoorange m-1'/>
-                </td>
-              </tr>
-              <tr className="ring-1 ring-todoblue rounded-1 rounded-[5px]">
-                <td className={style}>
-                  Attend USIU innovation session
-                </td>
-                <td className={style}>
-                  Later
-                </td>
-                <td className="flex py-3">
-                  <BsPencilSquare className='fill-todoblue m-1'/>  
-                  <BsFillCheckSquareFill className='fill-todogreen m-1'/>
-                  <BsFillTrashFill className='fill-todoorange m-1'/>
-                </td>
-              </tr>
-              <tr className="ring-1 ring-todoblue rounded-1 rounded-[5px]">
-                <td className={style}>
-                  Watch Mosh Hamedani course
-                </td>
-                <td className={style}>
-                  Delegate
-                </td>
-                <td className="flex py-3">
-                  <BsPencilSquare className='fill-todoblue m-1'/>  
-                  <BsFillCheckSquareFill className='fill-todogreen m-1'/>
-                  <BsFillTrashFill className='fill-todoorange m-1'/>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        );
-    }
-}
- 
-export default Todos;
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  );
+};
+
+export default TodoList;

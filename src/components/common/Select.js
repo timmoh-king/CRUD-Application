@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 const Select = ({ name, label, options, ...rest }) => {
   const styles =
@@ -13,21 +12,16 @@ const Select = ({ name, label, options, ...rest }) => {
         </label>
       </div>
       <div>
-        <select name={""} {...rest} className={styles}>
-          <option key={"/"} className="text-tododarkfade">
-            Important
-          </option>
+        <select name={name} id={name} {...rest} className={styles}>
+          {/* {options.map((option) => (
+            <option key={option.id} value={option.id} className="text-tododarkfade">
+              {option.name}
+            </option>
+          ))} */}
         </select>
       </div>
     </div>
   );
-};
-
-Select.propTypes = {
-  label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
 };
 
 export default Select;
