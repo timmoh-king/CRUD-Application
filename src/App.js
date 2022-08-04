@@ -1,22 +1,23 @@
-import './App.css';
-import Home from './components/Home';
-import Navbar from './components/Navbar';
-import { Route, Routes } from 'react-router-dom';
-import TodoForm from './components/TodoForm';
-import Signin from './components/SignInForm';
-import SignUp from './components/SignUpForm';
-
+import "./App.css";
+import Home from "./components/Home";
+import Navbar from "./components/Navbar";
+import { Route, Switch } from "react-router-dom";
+import TodoForm from "./components/TodoForm";
+import SignIn from "./components/SignInForm";
+import SignUp from "./components/SignUpForm";
 
 function App() {
   return (
-    <div className="App">
-       <Navbar />
-      <Routes>
-        <Route path='/'  element={ <Home />} />
-        <Route path='/todoform'  element={<TodoForm />} />
-        <Route path='/signin'  element={ <Signin /> } />
-        <Route path='/signup'  element={ <SignUp />} />
-        </Routes>
+    <div>
+      <Navbar />
+      <div className="App">
+        <Switch>
+        <Route path={`/todo/:id`} component={ TodoForm } />
+          <Route path="/login" component={SignIn} />
+          <Route path="/register" component={SignUp} />
+          <Route path="/" component={Home} />
+        </Switch>
+      </div>
     </div>
   );
 }

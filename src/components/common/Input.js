@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Input = ({ name, label, value , ...rest }) => {
+const Input = ({ name, label, value, error , ...rest }) => {
   const styles =
     "w-[500px] h-[45px] rounded-[3px] px-1 my-1 text-tododarkfade shadow-sm outline outline-1 drop-shadow-md drop-shadow-todogreen";
 
@@ -23,15 +23,9 @@ const Input = ({ name, label, value , ...rest }) => {
           />
 
       </div>
+      { error && <div role="alert" className="block sm:inline text-todoorange"> {error}</div>}
     </div>
   );
-};
-
-Input.propTypes = {
-  label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
 };
 
 export default Input;
