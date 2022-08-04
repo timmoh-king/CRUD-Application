@@ -1,7 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const Select = ({ name, label, options, ...rest }) => {
+const Select = ({ name, label, options ,error, ...rest }) => {
   const styles =
     "w-[500px] h-[45px] rounded-[3px] pl-1 pr-2 my-2 shadow-sm outline outline-1 drop-shadow-md";
 
@@ -13,21 +12,17 @@ const Select = ({ name, label, options, ...rest }) => {
         </label>
       </div>
       <div>
-        <select name={""} {...rest} className={styles}>
-          <option key={"/"} className="text-tododarkfade">
-            Important
-          </option>
+        <select name={name} id={name} {...rest} className={styles}>
+          {options.map((option) => (
+            <option key={option.id} value={option.id} className="text-tododarkfade">
+              {option.name}
+            </option>
+          ))}
         </select>
       </div>
+      { error && <div role="alert" className="block sm:inline text-todoorange"> {error} </div>}
     </div>
   );
-};
-
-Select.propTypes = {
-  label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
 };
 
 export default Select;
